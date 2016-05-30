@@ -1,0 +1,26 @@
+{
+  "name": "nodebb-plugin-nwod-roller",
+  "version": "1.0.0",
+  "description": "NodeBB Dice Roller Plugin For The New World of Darkness",
+  "main": "library.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/LukeLaupheimer/nodebb-plugin-nwod-roller"
+  },
+  "keywords": [
+    "nodebb",
+  "plugin",
+  "dice",
+  "roll",
+  "rpg",
+  "random"
+    ],
+  "author": {
+    "name": "Luke Laupheimer",
+    "email": "makhai@gmail.com"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/LukeLaupheimer/nodebb-plugin-nwod-rollerissues"
+  }
+}

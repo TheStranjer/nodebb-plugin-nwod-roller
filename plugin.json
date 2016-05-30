@@ -1,0 +1,18 @@
+{
+  "id": "nodebb-plugin-nwod-roller",
+  "name": "NodeBB Dice Roller Plugin For The New World of Darkness",
+  "description": "NodeBB Plugin which lets users use commends such as /roll 10 8 to roll ten sided dice and count successes.",
+  "url": "https://github.com/LukeLaupheimer/nodebb-plugin-nwod-roller",
+  "library": "./library.js",
+  "hooks": [
+  {
+    "hook": "filter:parse.post", "method": "parse", "priority": 6
+  }
+  ],
+  "staticDirs": {
+    "static": "./static"
+  },
+    "css": [
+      "./static/style.css"
+      ]
+}

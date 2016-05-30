@@ -1,0 +1,13 @@
+.dice-roll {
+  background-color: #666;
+  color: #fff;
+  padding: 0px 3px;
+  font-family: "Courier New", Courier, monospace;
+}
+
+.dice-icon {
+  height: 16px;
+  width: 16px;
+  display: inline;
+  padding-right: 3px;
+}
