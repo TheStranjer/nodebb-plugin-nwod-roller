@@ -37,7 +37,7 @@ Roller.againToText = function(again) {
 }
 
 Roller.rollHTML = function(query, results, again, pool) {
-  return "<span title='"+query+"' class='dice-roll'><img src='/plugins/nodebb-plugin-nwod-roller/static/d10.svg' class='dice-icon'></img>Rolling: " + pool + Roller.againToText(again) + "; Results: " + results.join(", ") + "; Succeses: " + Roller.successes(results) + " </span>";
+  return "<span title='"+query+"' class='dice-roll'><img src='/plugins/nodebb-plugin-nwod-roller/static/d10.svg' class='dice-icon'></img>Rolling: " + pool + Roller.againToText(again) + "; Results: " + results.join(", ") + "; Successes: " + Roller.successes(results) + " </span>";
 }
 
 Roller.parse = function(data, callback) {
