@@ -5,14 +5,17 @@
   "url": "https://github.com/LukeLaupheimer/nodebb-plugin-nwod-roller",
   "library": "./library.js",
   "hooks": [
-  {
-    "hook": "filter:parse.post", "method": "parse", "priority": 6
-  }
+    {
+      "hook": "filter:parse.post", "method": "parse", "priority": 6
+    },
+    {
+      "hook": "static:app.load", "method": "init"
+    }
   ],
   "staticDirs": {
     "static": "./static"
   },
-    "css": [
-      "./static/style.css"
-      ]
+  "css": [ "./static/style.css" ],
+  "languages" : "public/language",
+  "templates" : "public/templates"
 }

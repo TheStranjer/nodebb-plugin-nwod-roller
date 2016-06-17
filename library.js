@@ -7,6 +7,12 @@ var Roller = {};
 
 Roller.diceRegex = /\/roll (\d+)( \d{1,2}|)/i;
 
+Roller.init = function (params, callback) {
+  Roller.app = params.app;
+
+  callback();
+}
+
 Roller.roll = function (pool, again) {
   results = [];
 
@@ -24,20 +30,21 @@ Roller.successes = function(results) {
   return results.filter(function (result) { return result >= 8 } ).length;
 }
 
-Roller.againToText = function(again) {
-  if (again == 10) {
-    return "";
-  }
+Roller.rollHTML = function(query, results, again, pool, callback) {
+  var renderData = {
+    "pool" : pool,
+    "query" : query,
+    "results" : results,
+    "again" : again,
+    "differentAgain" : (again != 10),
+    "noRerolling" : (again > 10),
+    "results" : results.join(" "),
+    "successes" : Roller.successes(results)
+  };
 
-  if (again > 10) {
-    return " (No Rerolls)";
-  }
-
-  return " (" + again + "-Again)";
-}
-
-Roller.rollHTML = function(query, results, again, pool) {
-  return "<span title='"+query+"' class='dice-roll'><img src='/plugins/nodebb-plugin-nwod-roller/static/d10.svg' class='dice-icon'></img>Rolling: " + pool + Roller.againToText(again) + "; Results: " + results.join(", ") + "; Successes: " + Roller.successes(results) + " </span>";
+  Roller.app.render("partials/nwod-roll", renderData, function (err, html) {
+    callback(html);
+  });
 }
 
 Roller.parse = function(data, callback) {
@@ -58,15 +65,19 @@ Roller.parse = function(data, callback) {
         posts.setPostField(data.postData.pid, "rollQuery", query, function() {});
         posts.setPostField(data.postData.pid, "rollPool", pool, function() {});
 
-        data.postData.content = data.postData.content.replace(Roller.diceRegex, Roller.rollHTML(query, newResults, again, pool));
-        callback(null, data);
+        Roller.rollHTML(query, newResults, again, pool, function (html) {
+          data.postData.content = data.postData.content.replace(Roller.diceRegex, html);
+          callback(null, data);
+        });
       } else {
         posts.getPostFields(data.postData.pid, ["rollQuery", "rollAgain", "rollPool"], function(err, fields) {
           query = fields["rollQuery"];
           again = fields["rollAgain"];
           pool = fields["rollPool"];
-          data.postData.content = data.postData.content.replace(Roller.diceRegex, Roller.rollHTML(query, results, again, pool));
-          callback(null, data);
+          Roller.rollHTML(query, results, again, pool, function (html) {
+            data.postData.content = data.postData.content.replace(Roller.diceRegex, html);
+            callback(null, data);
+          })
         });
       }
     });
