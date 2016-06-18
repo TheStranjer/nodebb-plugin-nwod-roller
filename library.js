@@ -11,7 +11,7 @@ Roller.init = function (params, callback) {
   Roller.app = params.app;
 
   callback();
-}
+};
 
 Roller.roll = function (pool, again) {
   results = [];
@@ -24,11 +24,11 @@ Roller.roll = function (pool, again) {
   }
 
   return results;
-}
+};
 
 Roller.successes = function(results) {
   return results.filter(function (result) { return result >= 8 } ).length;
-}
+};
 
 Roller.rollHTML = function(query, results, again, pool, callback) {
   var renderData = {
@@ -45,7 +45,7 @@ Roller.rollHTML = function(query, results, again, pool, callback) {
   Roller.app.render("partials/nwod-roll", renderData, function (err, html) {
     callback(html);
   });
-}
+};
 
 Roller.parse = function(data, callback) {
   if (!data || !data.postData || !data.postData.content) {
