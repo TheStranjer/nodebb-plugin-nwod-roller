@@ -17,5 +17,6 @@
   },
   "css": [ "./static/style.css" ],
   "languages" : "public/language",
+  "defaultLang" : "en_US",
   "templates" : "public/templates"
 }
