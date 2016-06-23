@@ -38,7 +38,7 @@ Roller.rollHTML = function(query, results, again, pool, callback) {
     "again" : again,
     "differentAgain" : (again != 10),
     "noRerolling" : (again > 10),
-    "results" : results.join(" "),
+    "results" : results.join("&#44; "),
     "noRerollingPlaceholder" : "",
     "successes" : Roller.successes(results)
   };
