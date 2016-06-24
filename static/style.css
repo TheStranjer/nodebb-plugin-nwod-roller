@@ -11,3 +11,12 @@
   display: inline;
   padding-right: 3px;
 }
+
+.dice-failure {
+  color: #fff;
+}
+
+.dice-success {
+  color: #ffd700;
+  font-weight: 900;
+}

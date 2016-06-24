@@ -7,5 +7,13 @@
       ([[nwodroll:again, {again}]])
     <!-- ENDIF noRerolling -->
   <!-- ENDIF differentAgain -->
-  -- [[nwodroll:results, {results}]] -- [[nwodroll:successes, {successes}]]
+  -- [[nwodroll:results, {noRerollingPlaceholder}]]
+  <!-- BEGIN results -->
+    <!-- IF results.successful -->
+      <span class="dice-success">{results.numeric}</span>
+    <!-- ELSE -->
+      <span class="dice-failure">{results.numeric}</span>
+    <!-- ENDIF results.successful -->
+  <!-- END results -->
+   -- [[nwodroll:successes, {successes}]]
 </span>

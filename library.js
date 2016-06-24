@@ -30,6 +30,20 @@ Roller.successes = function(results) {
   return results.filter(function (result) { return result >= 8 } ).length;
 };
 
+Roller.processResultsForView = function(results) {
+  processedResults = [];
+  for (i = 0; i < results.length; i++) {
+    processedResults.push({
+      "numeric" : results[i],
+      "successful" : results[i] >= 8
+    });
+  }
+
+  return processedResults;
+};
+
+
+
 Roller.rollHTML = function(query, results, again, pool, callback) {
   var renderData = {
     "pool" : pool,
@@ -38,7 +52,7 @@ Roller.rollHTML = function(query, results, again, pool, callback) {
     "again" : again,
     "differentAgain" : (again != 10),
     "noRerolling" : (again > 10),
-    "results" : results.join("&#44; "),
+    "results" : Roller.processResultsForView(results),
     "noRerollingPlaceholder" : "",
     "successes" : Roller.successes(results)
   };
