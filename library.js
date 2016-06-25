@@ -53,7 +53,7 @@ Roller.rollHTML = function(query, results, again, pool, callback) {
     "differentAgain" : (again != 10),
     "noRerolling" : (again > 10),
     "results" : Roller.processResultsForView(results),
-    "noRerollingPlaceholder" : "",
+    "emptyParameter" : "",
     "successes" : Roller.successes(results)
   };
 
