@@ -1,4 +1,5 @@
 var posts = require('../../src/posts');
+var translator = module.parent.require('../public/src/modules/translator');
 
 // Dice roller formats
 // /roll # [\d{1,2}|]
@@ -56,7 +57,9 @@ var posts = require('../../src/posts');
     };
 
     Roller.app.render("partials/nwod-roll", renderData, function (err, html) {
-      callback(html);
+      translator.translate(html, function(html) {
+        callback(html);
+      });
     });
   };
 
