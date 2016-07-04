@@ -72,6 +72,9 @@ var posts = require('../../src/posts');
           query = match[0];
           pool = parseInt(match[1]);
           again = (match[2] == "" ? 10 : parseInt(match[2]));
+          if (again < 8) {
+            again = 8;
+          }
           newResults = Roller.roll(pool, again);
           posts.setPostField(data.postData.pid, "rollResults", newResults, function() {});
           posts.setPostField(data.postData.pid, "rollAgain", again, function() {});
