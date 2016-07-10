@@ -1,4 +1,6 @@
 var posts = require('../../src/posts');
+var RandomOrg = require('random-org');
+var d10source = new RandomOrg({ apiKey: 'your key here' });
 
 // Dice roller formats
 // /roll # [\d{1,2}|]
@@ -7,10 +9,23 @@ var posts = require('../../src/posts');
 (function (Roller) {
   Roller.diceRegex = /\/roll (\d+)( \d{1,2}|)/i;
 
+  Roller.resultsBuffer = [];
+
   Roller.init = function (params, callback) {
     Roller.app = params.app;
 
+    Roller.maintainResultsBuffer();
+
     callback();
+  };
+
+  Roller.maintainResultsBuffer = function () {
+    if (Roller.resultsBuffer.length < 100) {
+      d10source.generateIntegers({ min: 1, max: 10, n: 100 })
+      .then(function(result) {
+        Roller.resultsBuffer = Roller.resultsBuffer.concat(result.random.data);
+      });
+    }
   };
 
   Roller.roll = function (pool, again) {
@@ -18,10 +33,12 @@ var posts = require('../../src/posts');
 
     for (i = 0; i < pool; i++) {
       do {
-        result = Math.floor((Math.random() * 10) + 1);
+        result = Roller.resultsBuffer.pop();
         results.push(result);
       } while (result >= again);
     }
+
+    Roller.maintainResultsBuffer();
 
     return results;
   };

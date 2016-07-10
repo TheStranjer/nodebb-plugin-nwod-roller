@@ -15,3 +15,12 @@ Here's the format:
 `/roll 5 8` will display something like "Rolling: 5 (8-Again); Results: 1, 7, 7, 8, 3, 2; Succeses: 1"
 
 `/roll 5 11` will display something like "Rolling: 5 (No Rerolls); Results: 3, 1, 10, 8, 2; Succeses: 2"
+
+**Configuration:**
+
+In `library.js`, you should see a line that reads:
+```javascript
+var d10source = new RandomOrg({ apiKey: 'your key here' });
+```
+
+You should change `your api key here` with your [random.org](http://random.org/) API key. It will automatically maintain a buffer of 100 to 200 pre-loaded dice at all times.
